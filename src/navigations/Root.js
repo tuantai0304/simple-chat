@@ -8,9 +8,7 @@ const Root = StackNavigator({
 }, {
         headerMode: 'screen',
         navigationOptions: {
-            header: {
-                visible: false
-            }
+            header: null,
         }
     });
 

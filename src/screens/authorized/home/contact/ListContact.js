@@ -15,11 +15,11 @@ import { fetchListContact } from '../../../../actions';
 class ListContact extends Component {
     static navigationOptions = {
         title: 'List Contact',
-        header: (navigation) => ({
-            left: <DrawerButton navigation={navigation} />,
-            backTitle: null
-        }),
-    }
+        // header: (navigation) => ({
+        //     left: <DrawerButton navigation={navigation} />,
+        //     backTitle: null
+        // }),
+    };
 
     componentWillMount() {
         console.log('ListContact componentWillMount');

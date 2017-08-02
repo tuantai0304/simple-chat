@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
 class AddContact extends Component {
-    static navigationOptions = {
-        tabBar: {
-            visible: false
-        }
-    }
+    // static navigationOptions = {
+    //     tabBar: {
+    //         visible: false
+    //     }
+    // }
 
     render() {
         console.log(this.props);

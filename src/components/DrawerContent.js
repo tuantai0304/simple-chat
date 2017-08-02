@@ -9,10 +9,10 @@ class DrawerContent extends Component {
         const { user } = this.props;
         return (
             <View style={container}>
-                <View style={profile}>
-                    <Image source={{ uri: user.photoURL }} style={avatar} />
-                    <Text style={name}>{user.displayName || ''}</Text>
-                </View>
+                {/*<View style={profile}>*/}
+                    {/*<Image source={{ uri: user.photoURL }} style={avatar} />*/}
+                    {/*<Text style={name}>{user.displayName || ''}</Text>*/}
+                {/*</View>*/}
                 <DrawerView.Items {...this.props} />
             </View>
         );

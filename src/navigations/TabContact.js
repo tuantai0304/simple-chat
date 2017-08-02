@@ -8,10 +8,8 @@ const TabContact = StackNavigator({
     List: {
         screen: ListContact,
         navigationOptions: {
-            tabBar: {
-                label: 'Contact',
-                icon: ({ tintColor }) => <Image source={require('../img/icons/contact.png')} style={[styles.icon, { tintColor }]} />,
-            }
+            tabBarLabel: 'Contact',
+            tabBarIcon: ({ tintColor }) => <Image source={require('../img/icons/contact.png')} style={[styles.icon, { tintColor }]} />,
         }
     },
     Conversation: { screen: Conversation },

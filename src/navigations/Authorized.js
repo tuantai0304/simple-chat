@@ -10,8 +10,10 @@ const Authorized = DrawerNavigator({
     Profile: { screen: Profile },
     Setting: { screen: Setting },
     // Logout: { screen: '' },
-}, {
-        contentComponent: (props) => <DrawerContent {...props} />
-    });
+}
+// , {
+//         contentComponent: (props) => <DrawerContent {...props} />
+//     }
+);
 
 export default Authorized;

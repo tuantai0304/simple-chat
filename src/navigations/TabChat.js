@@ -10,10 +10,8 @@ const TabChat = StackNavigator({
     List: {
         screen: ListChat,
         navigationOptions: {
-            tabBar: {
-                label: 'Chat',
-                icon: ({ tintColor }) => <Image source={require('../img/icons/chat.png')} style={[styles.icon, { tintColor }]} />,
-            }
+            tabBarLabel: 'Chat',
+            tabBarIcon: ({ tintColor }) => <Image source={require('../img/icons/chat.png')} style={[styles.icon, { tintColor }]} />,
         }
     },
     Add: { screen: AddChat },

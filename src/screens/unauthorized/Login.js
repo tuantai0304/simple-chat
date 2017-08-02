@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity, Button } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { loginSuccess } from '../../actions/Authenticate';
 
+import { MKTextField, MKColor, MKButton} from 'react-native-material-kit';
+
+
 const config = {
-    apiKey: "AIzaSyAfpxJrikhNNKy0p2s5a2XdGHh1PrNaKJ0",
-    authDomain: "fir-login-6af59.firebaseapp.com",
-    databaseURL: "https://fir-login-6af59.firebaseio.com",
-    storageBucket: "fir-login-6af59.appspot.com",
-    messagingSenderId: "86655694512"
+    apiKey: "AIzaSyCTeOxBXfzG5cBDfbSrn61UmbQ4DX9E0ho",
+    authDomain: "learnreactnative-2432c.firebaseapp.com",
+    databaseURL: "https://learnreactnative-2432c.firebaseio.com",
+    projectId: "learnreactnative-2432c",
+    storageBucket: "learnreactnative-2432c.appspot.com",
+    messagingSenderId: "985626450608"
 };
 firebase.initializeApp(config);
+
+const LoginButton = MKButton.coloredButton().withText('LOGIN').build();
 
 class Login extends Component {
 
     static navigationOptions = {
-        header: {
-            visible: false
-        }
+        // headerMode: 'none',
     }
 
     state = {
         animating: false,
-        error: null
-    }
+        error: null,
+        email: '',
+        password: '',
+    };
 
     onLogin = async () => {
         try {
@@ -54,7 +60,46 @@ class Login extends Component {
         }
     }
 
+    onButtonPress() {
+        console.log('Button pressed');
+        const { email, password } = this.state;
+        // console.log(email);
+        // console.log(password);
+
+        this.setState({ error: '', loading: true });
+
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(this.onAuthSuccess.bind(this))
+            .catch(() => {
+                firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then(this.onAuthSuccess.bind(this))
+                    .catch(this.onAuthFailed.bind(this));
+                // console.log('error');
+            });
+    }
+
+    onAuthSuccess(user){
+        this.setState( {
+            email: '',
+            password: '',
+            error: '',
+            loading: false,
+        });
+
+        this.props.loginSuccess(user);
+    }
+
+    onAuthFailed(){
+        this.setState( {
+            error: 'Authentication failed',
+            loading: false,
+        });
+
+        console.log('error');
+    }
+
     render() {
+        const { form, fieldStyles, loginButtonArea, errorMessage, welcome, container } = styles;
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={{ fontSize: 20, color: 'red' }}>Login Screen</Text>
@@ -68,6 +113,39 @@ class Login extends Component {
                         <Text style={styles.error}>{this.state.error}</Text>
                     ) : null
                 }
+
+                {/* Add login form*/}
+                <MKTextField
+                    text={this.state.email}
+                    onTextChange = {email => this.setState({ email: email })}
+                    textInputStyle = {fieldStyles}
+                    placeholder = {'Email...'}
+                    tintColor = {MKColor.Teal}
+                />
+                <MKTextField
+                    text={this.state.password}
+                    onTextChange = {password => this.setState({ password: password })}
+                    textInputStyle = {fieldStyles}
+                    placeholder = {'Password...'}
+                    tintColor = {MKColor.Teal}
+                />
+
+                <Text style={errorMessage}>
+                    {this.state.error}
+                </Text>
+
+                {/*<View style={loginButtonArea}>*/}
+                    {/*/!*{ this.renderLoader() }*!/*/}
+                    {/*<LoginButton onPress = {this.onButtonPress.bind(this)} />*/}
+                {/*</View>*/}
+
+                <Button
+                    onPress={this.onButtonPress.bind(this)}
+                    title="Login"
+                    color="#841584"
+                    accessibilityLabel="Learn more about this purple button"
+                />
+
                 <TouchableOpacity
                     onPress={this.onLogin}
                     style={{
@@ -90,7 +168,30 @@ const styles = {
     error: {
         fontSize: 18,
         color: 'red'
-    }
+    },
+    form: {
+        paddingBottom: 10,
+        width: 200,
+    },
+    fieldStyles: {
+        height: 40,
+        color: MKColor.Orange,
+        width: 200,
+    },
+    loginButtonArea: {
+        marginTop: 20
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
+    },
 };
 
 export default connect(state => ({

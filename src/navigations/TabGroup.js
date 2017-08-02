@@ -10,10 +10,8 @@ const TabGroup = StackNavigator({
     List: {
         screen: ListGroup,
         navigationOptions: {
-            tabBar: {
-                label: 'Group',
-                icon: ({ tintColor }) => <Image source={require('../img/icons/group.png')} style={[styles.icon, { tintColor }]} />,
-            }
+            tabBarLabel: 'Group',
+            tabBaricon: ({ tintColor }) => <Image source={require('../img/icons/group.png')} style={[styles.icon, { tintColor }]} />,
         }
     },
     Add: { screen: AddGroup },
