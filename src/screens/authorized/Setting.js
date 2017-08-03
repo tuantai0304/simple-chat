@@ -3,21 +3,14 @@ import { View, Text } from 'react-native';
 import { DrawerButton } from '../../components';
 
 class Setting extends Component {
-    static navigationOptions = {
+    static navigationOptions = ({navigation}) => ({
         title: 'Setting',
-        header: (navigation) => ({
-            visible: true,
-            left: <DrawerButton navigation={navigation} />
-        })
-    }
+        headerLeft: <DrawerButton navigation={navigation} />,
+    });
 
     render() {
         return (
-            <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
+            <View>
                 <Text>Setting</Text>
             </View>
         );

@@ -5,10 +5,10 @@ import { DrawerButton } from '../../components';
 class Profile extends Component {
     static navigationOptions = {
         title: 'Profile',
-        header: (navigation) => ({
-            visible: true,
-            left: <DrawerButton navigation={navigation} />
-        })
+        // header: (navigation) => ({
+        //     visible: true,
+        //     left: <DrawerButton navigation={navigation} />
+        // })
     }
 
     render() {

@@ -9,7 +9,7 @@ const Authorized = DrawerNavigator({
     Home: { screen: Home },
     Profile: { screen: Profile },
     Setting: { screen: Setting },
-    // Logout: { screen: '' },
+    //Logout: { screen: '' },
 }
 // , {
 //         contentComponent: (props) => <DrawerContent {...props} />
