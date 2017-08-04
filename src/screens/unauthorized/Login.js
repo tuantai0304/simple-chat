@@ -58,7 +58,7 @@ class Login extends Component {
                 error: error.message
             });
         }
-    }
+    };
 
     onButtonPress() {
         console.log('Button pressed');
@@ -72,6 +72,13 @@ class Login extends Component {
             .then(this.onAuthSuccess.bind(this))
             .catch(() => {
                 firebase.auth().createUserWithEmailAndPassword(email, password)
+                    .then((user) => {
+                        firebase.database().ref(`/users/${user.uid}/profile`).set({
+                            name: user.displayName,
+                            email: user.email,
+                            avatar: user.photoURL
+                        });
+                    })
                     .then(this.onAuthSuccess.bind(this))
                     .catch(this.onAuthFailed.bind(this));
                 // console.log('error');

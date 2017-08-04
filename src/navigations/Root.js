@@ -3,7 +3,7 @@ import Authorized from './Authorized';
 import Login from '../screens/unauthorized/Login';
 
 const Root = StackNavigator({
-    //Unauthorized: { screen: Login },
+    Unauthorized: { screen: Login },
     Authorized: { screen: Authorized },
 }, {
         headerMode: 'screen',

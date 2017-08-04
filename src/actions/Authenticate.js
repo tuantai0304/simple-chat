@@ -12,6 +12,9 @@ export const loginSuccess = (user) => {
             actions: [
                 NavigationActions.navigate({
                     routeName: 'Authorized',
+                    params: {
+                        logout
+                    }
                 })
             ],
         });
